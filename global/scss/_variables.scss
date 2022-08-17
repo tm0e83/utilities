@@ -1,0 +1,101 @@
+// Foundation Default
+$global-radius:0!default;
+$global-padding:1rem!default;
+
+// General
+$dropdown-arrow: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='32' height='24' viewBox='0 0 32 24'><polygon points='0,0 32,0 16,24' style='fill: rgb%2898, 116, 128%29'></polygon></svg>";
+$contrast-warnings: false;
+$global-font-family:'Source Sans Pro', Helvetica, Roboto, Arial, sans-serif;
+$slogan-font-family:'Dosis', sans-serif;
+$thin-headline:'HelveticaNeueLTStd-Th', 'Source Sans Pro', Helvetica, Roboto, Arial, sans-serif;
+$thin-headline-ie:$global-font-family;
+
+$dark-gray: #627480;
+$darkest-gray: darken($dark-gray, 15%);
+$medium-gray: #adc7d9;
+$light-gray: #e1e7eb;
+$lighter-gray: lighten($light-gray, 5%);
+$lightest-gray: lighten($light-gray, 8%);
+$black: #000;
+$white: #fff;
+$body-background: #f5f8fa;
+$body-font-color: #222;
+
+// Auditor
+$auditor-color:rgb(131, 187, 52);
+$auditor-color-semi-transparent:rgba(131, 187, 52, 0.75);
+
+// Calendarium
+$calendarium-color:rgb(71,199,83);
+
+// Dedere
+$dedere-color:rgb(229,99,23);
+$dedere-color-light:scale-color($dedere-color, $lightness: 50%);
+
+// Analytics
+$dedere-analytics-color: #3a4250;
+$dedere-analytics-green: #88cc43;
+$dedere-analytics-highlight: #00A0CE;
+
+// Novella Agri
+$novella-agri-color:rgb(200, 21,20);
+$novella-agri-color-light:lighten($novella-agri-color, 45%);
+$novella-agri-color-semi-transparent:rgba($novella-agri-color, 0.75);
+$novella-agri-color-highlight:$novella-agri-color; // stil in use?
+
+// Mundus Agri
+$mundus-agri-color:rgb(0,113,188);
+$mundus-agri-color-light:lighten($mundus-agri-color, 57%);
+$mundus-agri-color-medium:lighten($mundus-agri-color, 25%);
+$mundus-agri-color-dark:darken($mundus-agri-color, 12.5%);
+
+$mint-color:#dbeff0;
+$highlight-color:#87cc10;
+$highlight-color-light:lighten($highlight-color, 57%);
+
+// Novella Agri
+$price-chart-color:rgb(41, 171, 225);
+$price-chart-color-semi-transparent:rgba(41, 171, 225, 0.75);
+$price-information-color:rgb(239, 125, 26);
+$price-information-color-semi-transparent:rgba(239, 125, 26, 0.75);
+
+// Other/Old plattforms
+$dedere-emporium-color:rgb(131,139,197);
+$dedere-emporium-secondary-color:rgb(130,165,33);
+$forum-dedere-color:rgb(98,50,138);
+$incursio-color:rgb(251,176,59);
+$kmc-color:rgb(14,80,136);
+$mailmanager-color:rgb(247,199,49);
+$procuro-color:rgb(0,146,69);
+$scriptor-color:rgb(0,113,188);
+$ostentus-color:rgb(240,125,27);
+$vocatus-color:rgb(41,171,226);
+
+// Abo
+$abo-bronze-color:rgb(198,119,41);
+$abo-silver-color:rgb(175,175,175);
+$abo-gold-color:rgb(239,179,0);
+
+// Icons
+$skype-color:rgb(18,165,244);
+$xing-color:rgb(2,100,102);
+$linkedin-color:rgb(0,119,181);
+$twitter-color:rgb(0, 172, 238);
+$facebook-color:rgb(59, 89, 152);
+
+$icon-word-color: #2a5699;
+$icon-pdf-color:#fb0f1a;
+$icon-powerpoint-color:#d24625;
+$icon-excel-color:#207347;
+$icon-image-color:#208895;
+$icon-file-color:$medium-gray;
+
+// Charts
+$chart-green-light:$highlight-color;
+
+// Rating
+$rating-color-aaa:#01b801;
+$rating-color-aa:#a4cf03;
+$rating-color-a:#fdac02;
+$rating-color-b:#fd7404;
+$rating-color-c:#d40525;

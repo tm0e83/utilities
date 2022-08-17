@@ -1,0 +1,110 @@
+@import '../../global/scss/variables';
+@import '../../global/scss/mixins';
+@import '../../global/scss/settings';
+
+@mixin expandedProgressSteps() {
+  flex-direction: row;
+
+  li {
+    display: block;
+    margin-bottom: 0;
+    font-size: 14px;
+    text-align: center;
+
+    &:before {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      margin: 0 auto 10px auto;
+    }
+
+    &:after {
+      width: 100%;
+      height: 2px;
+      left: -50%;
+      top: 20px;
+    }
+  }
+}
+
+.progress-steps {
+  counter-reset: step;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+
+  li {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    margin-bottom: 0.5rem;
+    flex: 1;
+    font-size: 12px;
+    position: relative;
+    text-transform: uppercase;
+    color: $medium-gray;
+
+    &:before {
+      width: 30px;
+      height: 30px;
+      content: counter(step);
+      counter-increment: step;
+      line-height: 30px;
+      border: 2px solid $medium-gray;
+      display: block;
+      text-align: center;
+      border-radius: 50%;
+      background-color: white;
+      margin-right: 0.5rem;
+    }
+
+    &:after {
+      height: 100%;
+      width: 2px;
+      content: '';
+      position: absolute;
+      background-color: $medium-gray;
+      left: 14px;
+      top: -50%;
+      z-index: -1;
+    }
+
+    &:first-child:after {
+      content: none;
+    }
+
+    &.active,
+    &.done {
+      color: $mundus-agri-color;
+
+      &:before {
+        border-color: $mundus-agri-color;
+        background-color: $mundus-agri-color;
+        color: $white;
+      }
+
+      & + li:after {
+        background-color: $mundus-agri-color;
+      }
+    }
+
+    &.done:before {
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      content: '\f00c';
+    }
+  }
+
+  $progressStepsBreakpoints: medium, mlarge, large;
+
+  @each $progressStepsBreakpoint in $progressStepsBreakpoints {
+    @include breakpoint($progressStepsBreakpoint) {
+      &.#{$progressStepsBreakpoint} {
+        @include expandedProgressSteps();
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+@import '~application/src/scss/mixins';
+@import '~application/src/scss/variables';
+@import '~application/src/scss/settings';
+@import 'foundation-sites/scss/foundation';
+
+$clip-text-trigger-color: $primary-color !default;
+$clip-text-trigger-hover-color: scale-color($primary-color, $lightness: -14%) !default;
+
+clip-text {
+  display: flex;
+  align-items: flex-end;
+
+  .text {
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    flex: 1 1 auto;
+    margin: 0;
+    padding: 0;
+  }
+
+  .toggle {
+    margin-left: 0.25rem;
+    flex: 0 1 auto;
+    display: none;
+    font-weight: 900;
+    color: $clip-text-trigger-color;
+    text-align: center;
+    font-style: normal;
+    cursor: pointer;
+    transition: color 0.25s ease-out;
+
+    &:before {
+      content: '...';
+    }
+
+    &:hover {
+      color: $clip-text-trigger-hover-color;
+    }
+  }
+
+  &.show {
+    display: block;
+
+    .text {
+      white-space: normal;
+      display: inline;
+    }
+
+    .toggle {
+      margin-left: 0;
+
+      &:before {
+        content: 'x';
+      }
+    }
+  }
+}

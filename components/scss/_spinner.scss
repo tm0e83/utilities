@@ -1,0 +1,60 @@
+@import '../../global/scss/variables';
+@import '../../global/scss/mixins';
+@import '../../global/scss/settings';
+
+@keyframes spinner-animation {
+  0% {
+    transform: scale(0.1);
+    opacity: 1;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.spinner {
+  position: relative;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+
+  & > div {
+    position: relative;
+    height: 100%;
+    width: 100%;
+
+    & > div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      animation-fill-mode: both;
+      height: 100%;
+      width: 100%;
+      border-radius: 100%;
+      border: 2px solid #666;
+      opacity: 0;
+
+      &:first-child {
+        animation: spinner-animation 1.6s 0s infinite cubic-bezier(0.165, 0.84, 0.44, 1);
+      }
+
+      &:last-child {
+        animation: spinner-animation 1.6s 0.8s infinite cubic-bezier(0.3, 0.61, 0.355, 1);
+      }
+    }
+  }
+
+  &.light > div > div {
+    border-color: #fff !important;
+  }
+
+  &:not(.light) > div > div {
+    border-color: $mundus-agri-color !important;
+  }
+}

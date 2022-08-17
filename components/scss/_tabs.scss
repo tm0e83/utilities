@@ -1,0 +1,190 @@
+@import '../../global/scss/variables';
+@import '../../global/scss/mixins';
+@import '../../global/scss/settings';
+
+// General
+$tabs-breakpoints: () !default;
+$tabs-border-radius: 0 !default;
+
+// Labels
+$tabs-label-color: #000 !default;
+$tabs-label-active-color: #000 !default;
+$tabs-label-background-color: #fff !default;
+$tabs-label-active-background-color: #fff !default;
+$tabs-label-border-color: #000 !default;
+$tabs-label-arrow-color: #000 !default;
+$tabs-label-active-arrow-color: #000 !default;
+$tabs-label-padding: 1rem 0.75rem !default; // the padding of a label
+$tabs-label-space-above: 0 !default; // vertical space between labels in small viewports
+$tabs-label-space-between: -1px !default; // horizontal space between labels in large viewports
+
+// Content
+$tabs-content-background-color: #fff !default;
+$tabs-content-border-width: 1px !default;
+$tabs-content-border-color: #000 !default;
+
+@mixin util-tabs-horizontal-styles() {
+  .tab-label {
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+    margin-bottom: 0;
+    border-bottom-color: transparent;
+    justify-content: center;
+    border-top-left-radius: $tabs-border-radius;
+    border-top-right-radius: $tabs-border-radius;
+
+    .tab-label-text {
+      text-align: center;
+    }
+
+    &:not(:first-of-type) {
+      margin-left: -1px;
+      margin-left: $tabs-label-space-between;
+    }
+
+    &:after {
+      display: none;
+    }
+  }
+
+  .tab-content {
+    order: 100;
+    margin-top: -1px;
+    display: none !important;
+    border-bottom-left-radius: $tabs-border-radius;
+    border-bottom-right-radius: $tabs-border-radius;
+
+    &.active {
+      display: block !important;
+    }
+  }
+
+  &.shrink .tab-label {
+    flex: 0 1 auto;
+    -ms-flex: 1;
+  }
+}
+
+@mixin util-tabs-add-breakpoint($breakpoint) {
+  &.tabs-#{$breakpoint} {
+    @include breakpoint($breakpoint) {
+      @include util-tabs-horizontal-styles;
+    }
+  }
+}
+
+.tabs-container {
+  display: flex;
+  flex-wrap: wrap;
+
+  .tab-label {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 100%;
+    justify-content: left;
+    padding: $tabs-label-padding;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+    align-items: center;
+    border: 1px solid $tabs-label-border-color;
+    background-color: $tabs-label-background-color;
+    color: $tabs-label-color;
+    margin-bottom: 1px;
+    user-select: none;
+
+    &:after {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-bottom: 1px solid $tabs-label-arrow-color;
+      border-left: 1px solid $tabs-label-arrow-color;
+      transform: rotate(-45deg);
+      position: absolute;
+      right: $global-padding;
+      top: 50%;
+      margin-top: -4px;
+    }
+
+    .tab-label-icon {
+      flex: 0 1 0;
+      padding-right: 0.5rem;
+    }
+
+    .tab-label-text {
+      flex: 0 1 auto;
+      text-align: left;
+
+      + .tab-label-icon {
+        padding-right: 0;
+        padding-left: 0.5rem;
+      }
+    }
+
+    &:first-of-type {
+      border-top-left-radius: $tabs-border-radius;
+      border-top-right-radius: $tabs-border-radius;
+      margin-left: 0;
+    }
+
+    &:last-of-type {
+      border-bottom: 1px solid $tabs-label-border-color;
+    }
+
+    &:not(.active) {
+      transition: background-color 100ms ease-in-out;
+    }
+
+    &.active {
+      cursor: default;
+      z-index: 3;
+      margin-bottom: 0;
+      border-bottom-color: transparent;
+      color: $tabs-label-active-color;
+      background-color: $tabs-label-active-background-color;
+
+      &:after {
+        margin-top: 0;
+        transform: rotate(135deg);
+        border-bottom-color: $tabs-label-active-arrow-color;
+        border-left-color: $tabs-label-active-arrow-color;
+      }
+    }
+  }
+
+  .tab-content {
+    display: none;
+    flex: 1 1 100%;
+    max-width: 100%;
+    background-color: lighten($tabs-content-background-color, 45%);
+    border-color: $tabs-content-border-color;
+    border-style: solid;
+    border-width: $tabs-content-border-width;
+    border-top: 0;
+    padding: 1rem;
+    position: relative;
+    z-index: 2;
+
+    &.active {
+      z-index: 4;
+      display: block !important;
+    }
+
+    &:last-of-type {
+      border-bottom-left-radius: $tabs-border-radius;
+      border-bottom-right-radius: $tabs-border-radius;
+    }
+  }
+
+  &.horizontal {
+    @include util-tabs-horizontal-styles;
+  }
+
+  @each $breakpoint in $tabs-breakpoints {
+    @include util-tabs-add-breakpoint($breakpoint);
+  }
+}

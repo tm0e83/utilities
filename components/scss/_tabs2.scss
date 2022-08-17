@@ -1,0 +1,179 @@
+@import '../../global/scss/variables';
+@import '../../global/scss/mixins';
+@import '../../global/scss/settings';
+
+// General
+$uic_tabs_breakpoint: 800px !default;
+$uic_tabs_breakpoints: () !default;
+$uic_tabs_borderRadius: $global-radius !default;
+
+// Labels
+$uic_tabs_labelColor: #000 !default;
+$uic_tabs_labelActiveColor: #000 !default;
+$uic_tabs_labelBackgroundColor: #fff !default;
+$uic_tabs_labelActiveBackgroundColor: #fff !default;
+$uic_tabs_labelBorderColor: #000 !default;
+$uic_tabs_labelArrowColor: #000 !default;
+$uic_tabs_labelActiveArrowColor: #000 !default;
+$uic_tabs_labelPadding: 1rem 0.75rem !default; // the padding of a label
+$uic_tabs_labelSpaceAbove: 0 !default; // vertical space between labels in small viewports
+$uic_tabs_labelSpaceBetween: -1px !default; // horizontal space between labels in large viewports
+
+// Content
+$uic_tabs_contentBackgroundColor: #fff !default;
+$uic_tabs_contentBorderWidth: 1px !default;
+$uic_tabs_contentBorderColor: #000 !default;
+
+@mixin uic_tabs_add_breakpoint($breakpoint) {
+  &.tabs-#{$breakpoint} {
+    @include breakpoint($breakpoint) {
+      .tab-label {
+        flex-wrap: wrap;
+        flex: 1 1 auto;
+        margin-bottom: 0;
+        border-bottom-color: transparent;
+        justify-content: center;
+        border-top-left-radius: $uic_tabs_borderRadius;
+        border-top-right-radius: $uic_tabs_borderRadius;
+
+        .tab-label-text {
+          text-align: center;
+        }
+
+        &:not(:first-of-type) {
+          margin-left: -1px;
+          margin-left: $uic_tabs_labelSpaceBetween;
+        }
+
+        &:after {
+          display: none;
+        }
+      }
+
+      .tab-content {
+        order: 100;
+        margin-top: -1px;
+        display: none !important;
+        border-bottom-left-radius: $uic_tabs_borderRadius;
+        border-bottom-right-radius: $uic_tabs_borderRadius;
+
+        &.active {
+          display: block !important;
+        }
+      }
+
+      &.shrink .tab-label {
+        flex: 0 1 auto;
+        -ms-flex: 1;
+      }
+    }
+  }
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+
+  .tab-label {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 100%;
+    justify-content: left;
+    padding: $uic_tabs_labelPadding;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+    align-items: center;
+    border: 1px solid $uic_tabs_labelBorderColor;
+    background-color: $uic_tabs_labelBackgroundColor;
+    color: $uic_tabs_labelColor;
+    margin-bottom: 1px;
+
+    &:after {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-bottom: 1px solid $uic_tabs_labelArrowColor;
+      border-left: 1px solid $uic_tabs_labelArrowColor;
+      transform: rotate(-45deg);
+      position: absolute;
+      right: $global-padding;
+      top: 50%;
+      margin-top: -4px;
+    }
+
+    .tab-label-icon {
+      flex: 0 1 0;
+      padding-right: 0.5rem;
+    }
+
+    .tab-label-text {
+      flex: 0 1 auto;
+      text-align: left;
+
+      + .tab-label-icon {
+        padding-right: 0;
+        padding-left: 0.5rem;
+      }
+    }
+
+    &:first-of-type {
+      border-top-left-radius: $uic_tabs_borderRadius;
+      border-top-right-radius: $uic_tabs_borderRadius;
+      margin-left: 0;
+    }
+
+    &:last-of-type {
+      border-bottom: 1px solid $uic_tabs_labelBorderColor;
+    }
+
+    &:not(.active) {
+      transition: background-color 100ms ease-in-out;
+    }
+
+    &.active {
+      cursor: default;
+      z-index: 3;
+      margin-bottom: 0;
+      border-bottom-color: transparent;
+      color: $uic_tabs_labelActiveColor;
+      background-color: $uic_tabs_labelActiveBackgroundColor;
+
+      &:after {
+        margin-top: 0;
+        transform: rotate(135deg);
+        border-bottom-color: $uic_tabs_labelActiveArrowColor;
+        border-left-color: $uic_tabs_labelActiveArrowColor;
+      }
+    }
+  }
+
+  .tab-content {
+    display: none;
+    flex: 1 1 100%;
+    background-color: lighten($uic_tabs_contentBackgroundColor, 45%);
+    border-color: $uic_tabs_contentBorderColor;
+    border-style: solid;
+    border-width: $uic_tabs_contentBorderWidth;
+    padding: 1rem 1rem 0.75rem;
+    position: relative;
+    z-index: 2;
+
+    &.active {
+      display: block !important;
+    }
+
+    &:last-of-type {
+      border-bottom-left-radius: $uic_tabs_borderRadius;
+      border-bottom-right-radius: $uic_tabs_borderRadius;
+    }
+  }
+
+  @each $breakpoint in $uic_tabs_breakpoints {
+    @include uic_tabs_add_breakpoint($breakpoint);
+  }
+}

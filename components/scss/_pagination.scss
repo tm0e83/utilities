@@ -1,0 +1,156 @@
+@import '../../global/scss/variables';
+@import '../../global/scss/mixins';
+@import '../../global/scss/settings';
+
+$activeButtonBackgroundColor: $primary-color !default;
+
+.pagination {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+
+  &.pagination-left,
+  &.pagination-right,
+  &.pagination-center {
+    .page-nav {
+      flex: 0 1 auto;
+    }
+  }
+
+  &.pagination-left {
+    justify-content: flex-start;
+  }
+
+  &.pagination-right {
+    justify-content: flex-end;
+  }
+
+  &.pagination-center {
+    justify-content: center;
+  }
+
+  &.pagination-justify {
+    justify-content: space-between;
+
+    .page-nav {
+      flex: 1;
+    }
+
+    .page-buttons {
+      justify-content: center;
+    }
+  }
+
+  .page-nav {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: space-between;
+
+    div {
+      user-select: none;
+    }
+  }
+
+  .prev-page,
+  .next-page,
+  .page-button {
+    flex: 0 0 auto;
+    border-radius: $global-radius;
+    margin-right: 1px;
+    padding: 0.3rem 0.35rem;
+    color: $body-font-color;
+
+    @include breakpoint(medium) {
+      padding: 0.3rem 0.65rem;
+    }
+  }
+
+  .page-ellipsis {
+    text-align: center;
+    flex: 1 1 auto;
+    border-radius: $global-radius;
+    margin-right: 1px;
+    padding: 0.3rem 0.2rem;
+  }
+
+  .prev-page,
+  .next-page {
+    flex: 0 0 auto;
+
+    &:not(.disabled) {
+      cursor: pointer;
+      transition: background-color 200ms ease-in-out;
+
+      &:hover {
+        background-color: $light-gray;
+      }
+    }
+
+    &.disabled {
+      opacity: 0.5;
+    }
+  }
+
+  .prev-page {
+    text-align: left;
+  }
+
+  .next-page {
+    text-align: right;
+  }
+
+  .page-buttons {
+    display: flex;
+    flex: 1 1 auto;
+  }
+
+  .page-button {
+    text-align: center;
+
+    &:not(.active) {
+      cursor: pointer;
+      transition: background-color 200ms ease-in-out;
+
+      &:hover {
+        background-color: $light-gray;
+      }
+    }
+
+    &.active {
+      cursor: default;
+      font-weight: bold;
+      background-color: $activeButtonBackgroundColor;
+      color: $white;
+    }
+  }
+
+  .no-results-error {
+    flex: 1;
+    display: none;
+  }
+}
+
+@mixin pagination-style(
+  $buttonBackground: transparent,
+  $buttonColor: $body-font-color,
+  $buttonHoverBackground: $light-gray,
+  $buttonHoverColor: $body-font-color,
+  $activeBackground: $activeButtonBackgroundColor,
+  $activeColor: $white
+) {
+  .prev-page,
+  .next-page,
+  .page-button {
+    color: $body-font-color;
+
+    &:hover {
+      background: $buttonHoverBackground;
+      color: $buttonHoverColor;
+    }
+
+    &.active {
+      background: $activeBackground;
+      color: $activeColor;
+    }
+  }
+}

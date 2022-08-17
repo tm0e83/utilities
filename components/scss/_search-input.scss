@@ -1,0 +1,95 @@
+@import '../../global/scss/variables';
+@import '../../global/scss/mixins';
+@import '../../global/scss/settings';
+
+@keyframes showDropdown {
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+    border: $input-border;
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+    border: $input-border-focus;
+  }
+}
+
+.search-input {
+  display: block;
+  position: relative;
+  text-align: left;
+  width: 100%;
+  font-size: 0.9rem;
+  outline: 0;
+  margin-bottom: 1rem;
+
+  .spinner {
+    user-select: none;
+    pointer-events: none;
+  }
+
+  input {
+    width: 100%;
+    margin: 0;
+  }
+
+  .item-list {
+    max-height: 16rem;
+    opacity: 0;
+    display: none;
+    cursor: auto;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background: $white;
+    border: $input-border;
+    border-top-width: 0 !important;
+    width: 100%;
+    transform-origin: top center;
+    transform: scaleY(0);
+    margin: -1px 0 0;
+    z-index: 9;
+
+    @include boxShadow();
+    @include overflowScrollY();
+
+    scroll-behavior: auto;
+  }
+
+  .item,
+  .message {
+    padding: 0.25rem $input-padding;
+    border-top: 1px solid $lighter-gray;
+  }
+
+  .item {
+    &:hover {
+      background-color: $light-gray;
+    }
+
+    &.active {
+      background-color: $lighter-gray;
+    }
+  }
+
+  &.open {
+    input {
+      border: $input-border-focus;
+    }
+
+    .item-list {
+      display: block;
+      animation-name: showDropdown;
+      animation-duration: 250ms;
+      animation-fill-mode: forwards;
+    }
+  }
+
+  &.loading {
+    input {
+      padding-right: 2.5rem;
+    }
+  }
+}

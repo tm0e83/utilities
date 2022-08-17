@@ -1,0 +1,258 @@
+@mixin boxHead($padding:1rem) {
+  padding: .75rem 1rem;
+  color: $body-font-color;
+  display: flex;
+  font-weight: 700;
+  background-color: $light-gray;
+  min-height: 3rem;
+  @include boxShadow();
+}
+
+@mixin contentBox($padding:1rem) {
+  padding: $padding;
+  background-color: #fff;
+  margin-bottom: 1rem;
+  @include boxShadow();
+
+  &.inset {
+    box-shadow: inset 0 0 0 1px $light-gray;
+  }
+}
+
+// DEPRECATED! Use '@mixin contentBox' instead
+@mixin content-box($padding:1rem) {
+  @include contentBox($padding);
+}
+
+@mixin boxShadow() {
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.25);
+}
+
+@mixin thinHeadline() {
+  font-family: $thin-headline;
+
+  @media (-ms-high-contrast:none) {
+    font-family: $thin-headline-ie;
+  }
+}
+
+@mixin overflowScrollX() {
+  overflow-x: auto;
+  overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  -webkit-scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+  }
+
+  &::-webkit-scrollbar:vertical {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar:horizontal {
+    height: 12px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, .15);
+    border-radius: 10px;
+    border: 2px solid #f2f2f2;
+    margin-right: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #f2f2f2;
+  }
+}
+
+@mixin overflowScrollY() {
+  overflow-y: auto;
+  overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  -webkit-scroll-behavior: smooth;
+  overscroll-behavior-y: contain;
+  scrollbar-width: thin; // FF
+
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+  }
+
+  &::-webkit-scrollbar:vertical {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar:horizontal {
+    height: 12px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, .15);
+    border-radius: 10px;
+    border: 2px solid #f2f2f2;
+    margin-right: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #f2f2f2;
+  }
+}
+
+@mixin fixedButton() {
+  position: fixed;
+  z-index: 10;
+  font-size: 1.3rem;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  font-weight: bold;
+  box-shadow: 0 -1px 5px 1px rgba(0, 0, 0, 0.4);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 0 !important;
+  transition: all 300ms ease-in-out;
+
+  &.visible {
+    transform: translate(-50%, 0);
+  }
+}
+
+@mixin imageDarkener($spread:45%, $opacity:1) {
+  &:after {
+    content: '';
+    position: absolute;
+    opacity: $opacity;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    /* Permalink - use to edit and share this gradient:http://colorzilla.com/gradient-editor/#000000+45,000000+100&0+45,0.7+100 */
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) $spread, rgba(0, 0, 0, 0.7) 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) $spread, rgba(0, 0, 0, 0.7) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) $spread, rgba(0, 0, 0, 0.7) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#b3000000', GradientType=0);
+    /* IE6-9 */
+  }
+}
+
+@mixin icon-chevron($color: $body-font-color, $width: 1em, $height: 1em, $border-width: 1px) {
+  content: ' ';
+  display: inline-block;
+  border: solid $color;
+  border-width: 0 $border-width $border-width 0;
+  width: $width;
+  height: $height;
+  transform-origin: center center;
+}
+
+@mixin chevron-up($color: $body-font-color, $width: 1em, $height: 1em, $border-width: 1px) {
+  @include icon-chevron($color, $width, $height, $border-width);
+  transform: rotate(-135deg);
+}
+
+@mixin chevron-down($color: $body-font-color, $width: 1em, $height: 1em, $border-width: 1px) {
+  @include icon-chevron($color, $width, $height, $border-width);
+  transform: rotate(45deg);
+}
+
+@mixin chevron-right($color: $body-font-color, $width: 1em, $height: 1em, $border-width: 1px) {
+  @include icon-chevron($color, $width, $height, $border-width);
+  transform: rotate(-45deg);
+}
+
+@mixin chevron-left($color: $body-font-color, $width: 1em, $height: 1em, $border-width: 1px) {
+  @include icon-chevron($color, $width, $height, $border-width);
+  transform: rotate(135deg);
+}
+
+@mixin sharpen-image() {
+  image-rendering: -moz-crisp-edges; /* Firefox */
+  image-rendering: -o-crisp-edges; /* Opera */
+  image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
+  image-rendering: crisp-edges;
+  -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
+}
+
+@keyframes fadeInBanderole {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@mixin newsBanderole {
+  .highlighting {
+    position: absolute;
+    z-index: 1;
+    display: inline-block;
+    font-size: 12px;
+    text-align: center;
+    padding: .25em 0;
+    color: white;
+    border: 2px solid #fff;
+    box-shadow: -1px 1px 2px 0 rgba(0, 0, 0, 0.2);
+    width: 250px;
+    top: 35px;
+    line-height: 1.4em;
+    right: 25px;
+    transform: rotate(45deg) translateZ(0);
+    transform-origin: 190px 145px 0;
+    opacity: 0;
+    animation: fadeInBanderole 500ms;
+    animation-delay: 500ms;
+    animation-fill-mode: forwards;
+    font-smoothing: antialiased;
+
+    &.alt {
+      display: none;
+      transform: none;
+      transform-origin: center;
+      width: auto;
+      padding: .25em 0.5em;
+      line-height: 1.2em;
+      margin-bottom: 0.25rem;
+      font-size: 10px;
+      box-shadow: none;
+      border: 0;
+      top: initial;
+      right: initial;
+      position: relative;
+    }
+
+    // read for free
+    &.type-1 {
+      background-color: #0096DB;
+    }
+
+    // free for bronze
+    &.type-2 {
+      background-color: #009688;
+    }
+
+    // top news
+    &.type-4 {
+      background-color: #F00050;
+    }
+  }
+}
+
+@mixin hoverSupported {
+  @media not all and (hover: none) {
+    &:hover {
+      @content;
+    }
+  }
+}

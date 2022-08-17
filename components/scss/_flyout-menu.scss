@@ -1,0 +1,117 @@
+@import '../../global/scss/variables';
+@import '../../global/scss/mixins';
+@import '../../global/scss/settings';
+
+$flyout-trigger-color: $primary-color !default;
+$flyout-trigger-hover-color: scale-color($primary-color, $lightness: -14%) !default;
+$flyout-trigger-hover-bg-color: darken($mundus-agri-color-light, 5%) !default;
+$flyout-trigger-open-color: scale-color($primary-color, $lightness: -14%) !default;
+
+@keyframes showFlyoutMenu {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.flyout-menu {
+  position: relative;
+  flex: 0 1 auto;
+  min-width: 1.5rem;
+  user-select: none;
+
+  .flyout-trigger {
+    &:not(.no-style) {
+      width: 30px;
+      height: 30px;
+      padding: 6px;
+      text-align: center;
+      font-size: 18px;
+      line-height: 18px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: block;
+      color: $flyout-trigger-color;
+      transition: all 0.25s ease-out;
+
+      &:hover {
+        color: $flyout-trigger-hover-color;
+        background-color: $flyout-trigger-hover-bg-color;
+      }
+    }
+  }
+
+  ul {
+    background-color: $white;
+    position: absolute;
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+    z-index: -1;
+    top: -9999px;
+    left: -9999px;
+    box-shadow: 0 1px 3px $dark-gray;
+    text-align: left;
+    opacity: 0;
+    visibility: hidden;
+
+    a {
+      font-size: 14px;
+      font-weight: normal;
+      text-transform: none;
+      display: block;
+      padding: 0.25rem 0.75rem;
+      white-space: nowrap;
+
+      &.disabled {
+        cursor: default;
+        color: $medium-gray;
+      }
+    }
+  }
+
+  &.is-open ul {
+    top: 100%;
+    left: initial;
+    right: 0;
+    opacity: 1;
+    z-index: 2;
+    visibility: visible;
+    animation-name: showFlyoutMenu;
+    animation-duration: 150ms;
+    animation-fill-mode: forwards;
+  }
+
+  &.is-open .flyout-trigger:not(.no-style) {
+    color: $flyout-trigger-open-color;
+    background-color: $flyout-trigger-hover-bg-color;
+
+    & + ul {
+      right: 3px;
+    }
+  }
+
+  &.middle {
+    &.is-open ul {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  &.left {
+    &.is-open ul {
+      left: initial;
+      right: 100%;
+    }
+  }
+
+  &.up {
+    &.is-open ul {
+      bottom: 0;
+      top: initial;
+    }
+  }
+}

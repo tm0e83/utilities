@@ -1,0 +1,76 @@
+@import '../../global/scss/variables';
+@import '../../global/scss/mixins';
+@import '../../global/scss/settings';
+
+@keyframes showConfirmOverlay {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.confirm-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  padding: 1rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.85);
+  z-index: 3;
+  cursor: default;
+
+  &.open {
+    display: flex;
+    animation-name: showConfirmOverlay;
+    animation-duration: 150ms;
+    animation-fill-mode: forwards;
+  }
+
+  & > div {
+    flex: 0 1 auto;
+    background-color: $white;
+    padding: 1rem;
+    box-shadow: inset 0 0 0 1px $light-gray;
+  }
+
+  h5 {
+    text-align: center;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+
+    a {
+      width: 100%;
+
+      &:first-of-type {
+        margin-bottom: 1rem;
+      }
+    }
+
+    @include breakpoint(480px) {
+      flex-direction: row;
+      justify-content: space-between;
+
+      a {
+        width: auto;
+        margin-left: 1rem;
+
+        &:first-of-type {
+          margin-bottom: 0;
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}

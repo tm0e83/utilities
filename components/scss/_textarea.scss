@@ -1,0 +1,52 @@
+@import '../../global/scss/variables';
+@import '../../global/scss/mixins';
+@import '../../global/scss/settings';
+
+.textarea {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+
+  .placeholder,
+  .content {
+    padding: 0.5rem;
+  }
+
+  .placeholder {
+    display: none;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: $medium-gray;
+  }
+
+  .content {
+    display: block;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    flex: 1;
+    outline: 0;
+    border: 1px solid $medium-gray;
+    content: '';
+    transition: border-color 250ms ease-in-out;
+
+    &:focus {
+      border-color: $dark-gray;
+    }
+  }
+
+  .maxlength-info {
+    text-align: right;
+    font-size: 0.85rem;
+    color: $medium-gray;
+  }
+
+  &.max-reached {
+    .maxlength-info {
+      color: get-color(alert);
+    }
+  }
+}

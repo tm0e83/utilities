@@ -1,0 +1,55 @@
+@import '~application/src/scss/mixins';
+@import '~application/src/scss/variables';
+@import '~application/src/scss/settings';
+@import 'foundation-sites/scss/foundation';
+
+tool-tip {
+  cursor: $has-tip-cursor;
+  color: $primary-color;
+  font-weight: $has-tip-font-weight;
+  display: inline-block;
+}
+
+.tool-tip-content {
+  transition: opacity 200ms ease-out;
+  position: absolute;
+  top: -99999px;
+  left: -99999px;
+  opacity: 0;
+  z-index: -1;
+  background-color: $tooltip-background-color;
+  color: $tooltip-color;
+  max-width: 320px;
+  padding: $tooltip-padding;
+  border-radius: $tooltip-radius;
+  font-size: $tooltip-font-size;
+  line-height: 1.3;
+  -webkit-font-smoothing: antialiased;
+  font-weight: normal;
+
+  b {
+    color: $highlight-color;
+  }
+
+  i {
+    color: $highlight-color;
+  }
+
+  &>span {
+    transform-origin: center center;
+  }
+
+  &[data-ypos="bottom"]>span {
+    @include css-triangle(6px, $tooltip-background-color, up);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+  }
+
+  &[data-ypos="top"]>span {
+    @include css-triangle(6px, $tooltip-background-color, down);
+    position: absolute;
+    top: 100%;
+    left: 50%;
+  }
+}

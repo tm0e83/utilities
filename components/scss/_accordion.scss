@@ -1,0 +1,19 @@
+@import '../../global/scss/variables';
+@import '../../global/scss/mixins';
+@import '../../global/scss/settings';
+
+.accordion {
+  .acc-title {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .acc-content {
+    overflow: hidden;
+    display: none;
+
+    &.open {
+      display: block;
+    }
+  }
+}
